@@ -1,6 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 #include <bits/stdc++.h>
+#include "../Double LinkedLIst/ErrorHandler.h"
 using namespace std;
 
 class Node{
@@ -128,6 +129,7 @@ int DoubleLinkedList::at(int index){
         }
         return ptr->data;
     }
+    else if(index >= length) return INT_MIN;
     else{
         Node * ptr = head;
         int i =0;
@@ -141,6 +143,7 @@ int DoubleLinkedList::at(int index){
 
 void DoubleLinkedList::insert(int data , int index){ 
     if(index == 0) add_forth(data);
+    else if(index >= length) throw OutOfBounds();
     else if(index == length) push_back(data);
     else{
         Node * curr = new Node , *temp = head;
@@ -154,12 +157,14 @@ void DoubleLinkedList::insert(int data , int index){
         curr->next = temp;
         temp->prev->next = curr;
         temp->prev = curr;
+        length++;
     }
 }
 
 void DoubleLinkedList::pop_at_n(int index){
     if(index == 0)pop_forth();
     else if(index == length-1)pop_back();
+    else if(index >= length) throw OutOfBounds();
     else {
         if(index > (length-1)/2){
             Node * ptr = last;

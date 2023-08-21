@@ -2,6 +2,7 @@
 #define LIST_H
 #include <bits/stdc++.h>
 using namespace std;
+#include "../LinkedList/ErrorHandling.h"
 
 
 
