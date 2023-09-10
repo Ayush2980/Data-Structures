@@ -9,7 +9,7 @@ class Node{
 
 class LinkedList{
     private : 
-    Node *  top = nullptr;
+    Node *  head = nullptr;
     int length = 0;
 
 
@@ -18,18 +18,27 @@ class LinkedList{
     void pop_back();
     void PrintList();
     int size();
+    int top();
 };
+
+int LinkedList::top(){
+    if(length){
+        Node * ptr = head;
+        return ptr->data;
+    }
+    else return INT16_MIN;
+}
 
 
 void LinkedList:: push_back(int data){
     Node * ptr = new Node;
     ptr->data = data;
     if(length){
-        ptr->prev = top;
-        top = ptr;
+        ptr->prev = head;
+        head = ptr;
     }
     else{
-        top = ptr;
+        head = ptr;
         ptr->prev = nullptr;
     }
     length++;
@@ -37,7 +46,7 @@ void LinkedList:: push_back(int data){
 
 
 void LinkedList::PrintList(){
-    Node * ptr = top;
+    Node * ptr = head;
     if(length){
         while(ptr->prev != nullptr){
             cout << ptr->data << " ";
@@ -49,10 +58,10 @@ void LinkedList::PrintList(){
 }
 
 void LinkedList::pop_back(){
-    Node * ptr = top->prev;
+    Node * ptr = head->prev;
     if(length){
-        free(top);
-        top = ptr;
+        free(head);
+        head = ptr;
         length--;
     }
     else{
