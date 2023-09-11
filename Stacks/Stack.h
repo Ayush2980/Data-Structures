@@ -1,86 +1,51 @@
+#ifndef LIST_H
+#define LIST_H
 #include <bits/stdc++.h>
 using namespace std;
 
+template<typename T>
 class Node{
-    public : 
-    int data;
-    Node * prev;
+    public :
+    T data;
+    Node<T>* prev = NULL;
 };
 
-class LinkedList{
-    private : 
-    Node *  head = nullptr;
-    int length = 0;
+template<typename T>
+class Stack{
 
-
-    public : 
-    void push_back(int data);
-    void pop_back();
-    void PrintList();
-    int size();
-    int top();
-};
-
-int LinkedList::top(){
-    if(length){
-        Node * ptr = head;
-        return ptr->data;
-    }
-    else return INT16_MIN;
-}
-
-
-void LinkedList:: push_back(int data){
-    Node * ptr = new Node;
-    ptr->data = data;
-    if(length){
-        ptr->prev = head;
-        head = ptr;
-    }
-    else{
-        head = ptr;
-        ptr->prev = nullptr;
-    }
-    length++;
-}
-
-
-void LinkedList::PrintList(){
-    Node * ptr = head;
-    if(length){
-        while(ptr->prev != nullptr){
-            cout << ptr->data << " ";
-            ptr = ptr->prev;
+    public :
+    Node<T> * up = NULL;
+    int size =0;
+    T top(){
+        if(!empty()) return up->data;
+        else{
+            cout << "Empty stack" <<endl;
+            return up->data;
         }
-        cout << ptr->data << endl;
-    }
-    else cout << "Empty Stack  !!" << endl;
-}
+    };
+    T pop(){
+        if(!empty()){
+            T val = up->data;
+            up = up->prev;
+            size--;
+            return val;
+        }
+        else{
+            cout <<"Empty Stack" <<endl;
+            return up->data;
+        }
+    };
+    void push(T val){
+        Node<T> * ptr = new Node<T>;
+        ptr->data = val;
+        ptr->prev = up;
+        up = ptr;  
+        size++;
+    };
+    bool empty(){
+        if(size) return 0;
+        return 1; 
+    };
+};
 
-void LinkedList::pop_back(){
-    Node * ptr = head->prev;
-    if(length){
-        free(head);
-        head = ptr;
-        length--;
-    }
-    else{
-        cout << "Empty Stack" <<endl;
-    }
-}
-
-int main(){
-    LinkedList a;
-    a.push_back(0);
-    a.push_back(1);
-    a.push_back(2);
-    a.push_back(3);
-    a.pop_back();
-    a.pop_back();
-    a.pop_back();
-    a.pop_back();
-    a.PrintList();
-
-    return 0;
-}
-
+#endif
