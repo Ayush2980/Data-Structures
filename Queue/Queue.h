@@ -1,7 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 template <typename T>
-class Queue
+class queue
 {
     T *data;
     int front = -1;
@@ -10,16 +10,16 @@ class Queue
     int capacity = 1;
 
 public:
-    Queue(int s)
+    queue(int s)
     {
         data = new T[s];
         capacity = s;
     }
-    void Enqueue(T val)
+    void enqueue(T val)
     {
         if (size == capacity)
         {
-            cout << "Queue Full" << endl;
+            cout << "queue Full" << endl;
             return;
         }
         else
@@ -33,11 +33,11 @@ public:
             front = 0;
         }
     };
-    void Dequeue()
+    void dequeue()
     {
         if (size == 0)
         {
-            cout << "Empty Queue" << endl;
+            cout << "Empty queue" << endl;
             return;
         }
         else
@@ -50,7 +50,7 @@ public:
     {
         if (size == 0)
         {
-            cout << "Emptgy Queue" << endl;
+            cout << "Emptgy queue" << endl;
             return;
         }
         for (int i = front, j = 0; j < size; j++, i = (i + 1) % capacity)
@@ -59,7 +59,7 @@ public:
         }
         cout << endl;
     };
-    T Front(){
+    T front(){
         return data[front];
     }
 };
