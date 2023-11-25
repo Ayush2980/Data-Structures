@@ -115,7 +115,7 @@ namespace B
                     temp = temp->right;
                 }
                 root->data = temp->data;
-                root->left = deleteNode(root->left , temp->data);
+                root->right = deleteNode(root->right , temp->data);
                 return root;
 
 
